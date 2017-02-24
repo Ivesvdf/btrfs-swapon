@@ -20,7 +20,7 @@ Then execute
 ```
 btrfs-swapon 
 ```
-on every boot. This builds the loop device and starts using it as swap. If using systemd this is easy, read below!
+on every boot (cp btrfs-swapon /sbin will allow you to use /sbin/btrfs-swapon). This builds the loop device and starts using it as swap. If using systemd this is easy, read below!
 
 When using systemd, you probably want to 
 ```
