@@ -5,7 +5,9 @@ Description=Turn on 4GiB swap on BTRFS
 
 [Service]
 Type=oneshot
-Environment="SWAPFILE=/4GiB.swap"
+Environment="SWAPFILE=/swapfile"
 RemainAfterExit=true
-ExecStart=/sbin/btrfs-swapon 4G ${SWAPFILE}
-ExecStop=/sbin/btrfs-swapoff ${SWAPFILE}
+ExecStart=/sbin/btrfs-swapon ${SWAPFILE}
+
+[Install]
+WantedBy=multi-user.target
