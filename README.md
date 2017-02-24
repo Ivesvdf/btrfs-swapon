@@ -12,15 +12,15 @@ and https://gist.github.com/romaninsh/118952ce61643914fb00
 ## Usage
 Execute 
 ```
-btrfs-install 4G 
+./btrfs-swapinstall 4G 
 ```
 ONCE. Replace 4G with the size if you like. This will create a file /swapfile and make it NOCOW. No point in repeating this every boot. 
 
-Then execute 
+Then execute on every boot
 ```
 btrfs-swapon 
 ```
-on every boot (cp btrfs-swapon /sbin will allow you to use /sbin/btrfs-swapon). This builds the loop device and starts using it as swap. If using systemd this is easy, read below!
+(cp btrfs-swapon /sbin will allow you to use /sbin/btrfs-swapon). This constructs the loop device and starts using it as swap. If using systemd running this on boot is easy:
 
 When using systemd, you probably want to 
 ```
@@ -36,7 +36,11 @@ to refresh systemd, then
 ```
 systemctl enable btrfs-swapon
 ```
-to make the script /sbin/btrfs-swapon run on every boot. 
+to make the script /sbin/btrfs-swapon run on every boot. To actually use it, either reboot or 
+```
+systemctl start btrfs-swapon
+```
+You can then check "top" to see how much swap is available. This should be at least the amount you gave to btrfs-swapinstall. When using the service, swap will be automatically set on every boot. 
 
 ## WARNNG
 Don't balance your file system as long as you use this swap file. 
